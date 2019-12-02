@@ -1,0 +1,192 @@
+Compound;CAS;Type;Rs;Sampler;Membran;Flow velocity;Publication;Flow factor;publication factor;Flow factor new
+Azoxystrobin;131860338;F;1.000177938;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Boscalid;188425856;F;0.579711234;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Cyprodinil;121552612;F;0.795376101;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Dimethoate;60515;I;0.375299337;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Dimethomorph;110488705;F;0.64908745;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Fenhexamid;126833178;F;0.257394937;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Fludioxonil;131341861;F;0.889055586;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Imidacloprid;138261413;I;0.348731375;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Indoxacarb;173584446;I;0.325492193;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Iprovalicarb;140923177;F;0.476214072;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Kresoxim-methyl;143390890;F;0.73957085;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Metalaxyl-M;70630170;F;0.617757627;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Metrafenone;220899036;F;0.71185135;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Myclobutanil;88671890;F;0.648337994;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Pyrimethanil;53112280;F;1.173322704;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Quinoxyfen;124495187;F;1.126790048;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Tebuconazole;107534963;F;0.607690628;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Tebufenpyrad;119168773;F;0.677391036;SDB-RPS;NA;0.15-0.2M/sec;(Fernández et al., 2014);3;1;5
+Atrazine;1912249;H;0.48;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Atrazine-desethyl;6190654;M;0.2;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Carbendazim;10605217;F;0.36;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diazinon;333415;I;1.01;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diclofenac;15307865;PH ;0.18;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diuron;330541;H;0.6;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Irgarol;28159980;H;0.76;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Isoproturon;34123596;H;0.54;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Mecoprop;7085190;H;0.09;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Sulfamethoxazole;723466;PH ;0.14;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Terbutryn;886500;H;0.66;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Terbutylazin;5915413;H;0.61;SDB-RPS;NA;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Atrazine;1912249;H;0.12;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Atrazine-desethyl;6190654;M;0.1;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Carbendazim;10605217;F;0.1;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diazinon;333415;I;0.06;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diclofenac;15307865;PH ;0.08;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Diuron;330541;H;0.03;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Irgarol;28159980;H;0.13;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Isoproturon;34123596;H;0.1;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Mecoprop;7085190;H;0.07;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Sulfamethoxazole;723466;PH ;0.09;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Terbutryn;886500;H;0.11;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+Terbutylazin;5915413;H;0.13;SDB-RPS_PES;PES;0.13m/sec;(Vermeirssen et al., 2009);3;2;3
+atrazine;1912249;H;0.088;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+desethylatrazine;6190654;M;0.065;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+deisopropylatrazine;1007289;M;0.044;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+hydroxyatrazine;2163680;M;0.037;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+carbendazim;10605217;F;0.078;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+chloridazon;1698608;H;0.075;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+diazinon;333415;I;0.033;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+diuron;330541;H;0.032;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+irgarol;28159980;H;0.08;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+isoproturon;34123596;H;0.069;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+mecoprop;7085190;H;0.021;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+metolachlor;51218452;H;0.098;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+sulcotrione;99105778;H;0.023;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+terbutryn;886500;H;0.081;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+terbuthylazine;5915413;H;0.087;SDB-RPS_PES;PES;0.08m/sec;(Vermeirssen et al., 2012);2;2;2
+Tebuthiuron;34014181;H;0.11;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Hexazinone;51235042;H;0.1;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Simazine;122349;H;0.14;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Atrazine;1912249;H;0.14;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Diuron;330541;H;0.08;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Ametryn;834128;H;0.14;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Metolachlor;51218452;H;0.21;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Fipronil;120068373;I;0.16;SDB-RPS_PES;PES;0.14m/sec;(Shaw et al., 2009);3;3;3
+Tebuthiuron;34014181;H;0.25;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Hexazinone;51235042;H;0.22;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Simazine;122349;H;0.36;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Atrazine;1912249;H;0.44;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Diuron;330541;H;0.37;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Ametryn;834128;H;0.67;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Metolachlor;51218452;H;0.64;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+Fipronil;120068373;I;0.59;SDB-RPS;NA;0.14m/sec;(Shaw et al., 2009);3;3;3
+2,4-D;94757;H;0.02;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+carbendazime;10605217;F;0.09;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+chlortoluron;15545489;H;0.09;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+diazinon;333415;I;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+dimethachlor;50563365;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+dimethenamide;87674688;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+dimethoat;60515;I;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+dimethomorph;110488705;F;0.08;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+diuron;330541;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+epoxiconazole;133855988;F;0.08;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+ethofumesate;26225796;H;0.08;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+fenamidone;161326347;F;0.2;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+fenhexamid;126833178;F;0.4;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+fipronil;120068373;I;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+?ufenacet;142459583;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+isoproturon;34123596;H;0.08;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+mecoprop;7085190;H;0.03;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+metamitron;41394052;H;0.06;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+metazachlor;67129082;H;0.2;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+napropamide;15299997;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+pethoxamide;106700292;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+pirimicarb;23103982;I;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+prometryn + terbutryn;7287196;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+propachlor;1918167;H;0.2;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+propiconazole;60207901;F;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+S-metolachlor;87392129;H;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+tebuconazole;107534963;F;0.09;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+thiamethoxame;153719234;I;0.1;SDB-RPS_PES;PES;FieldExperiment;(Moschet et al., 2015);6;4;8
+Atrazine;1912249;H;0.37;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Carbendazim;10605217;F;0.33;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Chloridazon;1698608;H;0.25;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Diazinon;333415;I;0.42;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Diuron;330541;H;0.38;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Irgarol;28159980;H;0.39;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Isoproturon;34123596;H;0.38;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Mecoprop;7085190;H;0.13;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Metolachlor;51218452;H;0.4;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Sulcotrione;99105778;H;0.07;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Terbutryn;886500;H;0.38;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+Terbuthylazine;5915413;H;0.39;SDB-RPS;NA;0.13-0.14m/sec;(Vermeirssen et al., 2013);3;5;3
+tebuthiuron;34014181;H;0.48;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+hexazinone;51235042;H;0.48;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+simazine;122349;H;0.46;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+atrazine;1912249;H;0.68;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+diuron;330541;H;0.59;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+ametryn ;834128;H;0.75;SDB-RPS;NA;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+tebuthiuron;34014181;H;0.16;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+hexazinone;51235042;H;0.14;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+simazine;122349;H;0.16;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+atrazine;1912249;H;0.17;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+diuron;330541;H;0.07;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+ametryn ;834128;H;0.14;SDB-RPS_PES;PES;0.14m/sec;(Shaw and Mueller, 2009);3;6;3
+Acetochlor;34256821;H;0.35;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Alachlor;15972608;I;0.32;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Atrazine;1912249;H;0.28;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Carbofuran;1563662;H;0.13;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Chlorfenvinphos;470906;I;0.35;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+a-Endosulfan;959988;I;0.42;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Fenpropidin;67306007;F;0.3;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Hexazinone;51235042;H;0.26;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Linuron;330552;H;0.12;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Oxadiazon;19666309;F;0.44;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Pirimicarb;23103982;I;0.38;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Tebuconazole;107534963;F;0.19;SDB-XC;NA;0.135m/sec;(Gunold et al., 2008);3;7;3
+Acetochlor;34256821;H;0.34;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Alachlor;15972608;I;0.31;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Atrazine;1912249;H;0.22;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Carbofuran;1563662;H;0.14;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Chlorfenvinphos;470906;I;0.34;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+a-Endosulfan;959988;I;0.38;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Fenpropidin;67306007;F;0.27;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Hexazinone;51235042;H;0.21;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Linuron;330552;H;0.13;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Oxadiazon;19666309;F;0.34;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Pirimicarb;23103982;I;0.29;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Tebuconazole;107534963;F;0.24;SDB-XC;NA;0.4m/sec;(Gunold et al., 2008);4;7;6
+Atrazine;1912249;H;0.013;SDB_RPD_Z-bind;Z-bind;0m/sec;(O’Brien et al., 2011);0;8;0
+Prometryn  ;7287196;H;0.009;SDB_RPD_Z-bind;Z-bind;0m/sec;(O’Brien et al., 2011);0;8;0
+Atrazine;1912249;H;0.041;SDB_RPD_Z-bind;Z-bind;0.034m/sec;(O’Brien et al., 2011);2;8;2
+Prometryn  ;7287196;H;0.032;SDB_RPD_Z-bind;Z-bind;0.034m/sec;(O’Brien et al., 2011);2;8;2
+Atrazine;1912249;H;0.072;SDB_RPD_Z-bind;Z-bind;0.08m/sec;(O’Brien et al., 2011);2;8;2
+Prometryn  ;7287196;H;0.06;SDB_RPD_Z-bind;Z-bind;0.08m/sec;(O’Brien et al., 2011);2;8;2
+Atrazine;1912249;H;0.124;SDB_RPD_Z-bind;Z-bind;0.16m/sec;(O’Brien et al., 2011);3;8;4
+Prometryn  ;7287196;H;0.107;SDB_RPD_Z-bind;Z-bind;0.16m/sec;(O’Brien et al., 2011);3;8;4
+Atrazine;1912249;H;0.136;SDB_RPD_Z-bind;Z-bind;0.24m/sec;(O’Brien et al., 2011);3;8;4
+Prometryn  ;7287196;H;0.126;SDB_RPD_Z-bind;Z-bind;0.24m/sec;(O’Brien et al., 2011);3;8;4
+Hexachlorobenzene;118741;F;0.046;C18;NA;0m/sec;(Vrana et al., 2006);0;9;0
+Lindane;58899;I;0.009;C18;NA;0m/sec;(Vrana et al., 2006);0;9;0
+Endosulfan I;115297;I;0.027;C18;NA;0m/sec;(Vrana et al., 2006);0;9;0
+Dieldrin;60571;I;0.052;C18;NA;0m/sec;(Vrana et al., 2006);0;9;0
+Hexachlorobenzene;118741;F;0.024;C18;NA;0.4m/sec;(Vrana et al., 2006);4;9;6
+Endosulfan I;115297;I;0.01;C18;NA;0.4m/sec;(Vrana et al., 2006);4;9;6
+Dieldrin;60571;I;0.014;C18;NA;0.4m/sec;(Vrana et al., 2006);4;9;6
+Hexachlorobenzene;118741;F;0.063;C18;NA;0.7m/sec;(Vrana et al., 2006);5;9;7
+Lindane;58899;I;0.017;C18;NA;0.7m/sec;(Vrana et al., 2006);5;9;7
+Endosulfan I;115297;I;0.032;C18;NA;0.7m/sec;(Vrana et al., 2006);5;9;7
+Dieldrin;60571;I;0.043;C18;NA;0.7m/sec;(Vrana et al., 2006);5;9;7
+2,4-D;94757;H;0.064;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+Dicamba;1918009;H;0.044;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+Dichlorprop;120365;H;0.112;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+Fluroxypyr;69377817;H;0.073;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+MCPA;94746;H;0.062;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+MCPB;94815;H;0.062;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+Mecoprop;7085190;H;0.113;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+Triclopyr;55335063;H;0.053;3M Empore™ anion-SR exchange disks;PES;0.5m/sec;(Townsend et al., 2018);4;10;6
+2.4-D;94757;;0.1;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+1.3-benzothiazole-2-sulfonate;941571;;0.08;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+benzotriazole;95147;;0.29;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+carbamazepine;298464;;0.58;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+carbendazim;10605217;;0.48;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+clarithromycin;81103119;;0.44;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+diazinon;333415;;1.07;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+diclofenac;15307865;;0.38;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+diuron;330541;;0.71;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+MCPA;94746;;0.11;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+mecoprop;16484778;;0.17;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+metolachlor;51218452;;0.92;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7
+terbutryn;886500;;1.02;SDB-RPS;NA;0.75–0.85m/s;(Mutzner et al., 2019);5;11;7

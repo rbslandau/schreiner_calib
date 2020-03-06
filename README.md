@@ -1,4 +1,4 @@
-Repo for the publication "Sampling rates for passive samplers exposed a short pulse exposure of 42 organic pesticides"
+Repo for the publication "Sampling rates for passive samplers exposed to a short pulse exposure of 42 organic pesticides"
 ====================================================================================================================
 
 This repo contains the R code and data for the related publication submitted to Environmental Pollution.
@@ -8,6 +8,8 @@ R code (RMarkdown document) written by Verena C. Schreiner and Mira Kattwinkel, 
 ## Description of material ##
 
 R_Schreiner_sampling_rates:				*Provides R code to model sampling rates, run the analyses and generate the plots presented in the manuscript and the SI*  
+
+Schreiner_sampling_rates_all_data: 				*Raw data of cumulated compound mass on the SDB disks and water concentrations and all other data sets in spreadsheet format*
 
 Code_SDB:			 *Translation of codes of SDB disks* 
 

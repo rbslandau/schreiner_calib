@@ -20,12 +20,12 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Sampling rates for passive samplers exposed a short pulse exposure of 42 organic pesticides
+# Sampling rates for passive samplers exposed to a short pulse exposure of 42 organic pesticides
 
-Verena C. Schreiner, Nikita Bakanov, Mira Kattwinkel, Sarah Könemann, Stefan Kunz, Etienne L.M. Vermeirssen & Ralf B. Schäfer
+Verena C. Schreiner, Nikita Bakanov, Mira Kattwinkel, Sarah Koenemann, Stefan Kunz, Etienne L.M. Vermeirssen & Ralf B. Schaefer
 
 R script written by Verena C. Schreiner and Mira Kattwinkel
-checked by Ralf B. Schäfer and Stefan Kunz
+checked by Ralf B. Schaefer and Stefan Kunz
 University of Koblenz-Landau  
 Fortstrasse 7  
 76829 Landau  
@@ -34,12 +34,12 @@ Corresponding mail adress: schreiner-verena'@'uni-landau.de
 
 ## Tools / Packages
 ```{r, warning=FALSE,message=FALSE,error=FALSE}
-library(simecol)      # algorithm used to calculate sampling rates of 5 and 7 day approach
-library(FME)          # algorithm used to calculate sampling rates of 7 day and combined approach
-library(data.table)   # data formatting
-library(lubridate)    # formatting of data + calculation of durations
+library(simecol)      # algorithm used to calculate sampling rates of 5 and 7 day dataset
+library(FME)          # algorithm used to calculate sampling rates of 7 day and combined dataset
+library(data.table)   # data formatation
+library(lubridate)    # formatation of dats + calculations of time lengths
 library(glmnet)       # for LASSO approach
-library(dplyr)        # data formatting
+library(dplyr)        # data formatation
 library(cvq2)         # calculate q2
 ```
 
@@ -50,7 +50,7 @@ library(cvq2)         # calculate q2
 path <- getwd()
 ```
 
-create folders in working directory where resulting graphs will be saved later
+create folders in work directive where result graphs are saved later
 ```{r}
 dir.create(file.path(path, "fits")) # creating a folder called "fits" (the graphs will be saved there)
 dir.create(file.path(path, "TWA"))
@@ -74,7 +74,7 @@ Results_EQUAN = melt(Results_EQUAN, id.vars = c("Compound"), value.name = "Conce
                       variable.name = "Code") 
 
 
-# water concentrations from SPE [ng/L]
+# water concentrations via SPE [ng/L]
 Results_SPE = read.table(file.path(path, "Results_SPE.csv"), header = TRUE, sep = ";")
 Results_SPE = as.data.table(Results_SPE)
 # transform to long version
@@ -85,7 +85,7 @@ Results_SPE = melt(Results_SPE, id.vars = c("Compound"), value.name = "Concentra
 Results_SPE$Code = gsub("SPE.", "",Results_SPE$Code)
 ```
 
-data on compound properties
+property data of compounds
 ```{r}
 prop = read.table(file.path(path,"Info_compounds.csv"), 
                             header=TRUE, sep = ";", na.strings = c("NR", "NA"))
@@ -109,9 +109,9 @@ Code_SDB = as.data.table(Code_SDB)
 # delete rows with Blank (Charge Disk)
 # Code_SDB <- Code_SDB[!Code_SDB$Charge_disks == "Blank",]
 # CH12 und CH15 -> Blanks_VerII
-Code_SDB[c(1:2), Charge_disks := c("Blank_VerII", "Blank_VerII")] # blanks equals Time where disks were deployed
+Code_SDB[c(1:2), Charge_disks := c("Blank_VerII", "Blank_VerII")] # blanks equals Time where disks were add
 
-# merge columns with time information (with lubridate)
+# merge columsn with time information (with lubridate)
 Code_SDB$Time = gsub("1899-12-31", "", Code_SDB$Time)
 
 # add timepoint of blank
@@ -155,22 +155,22 @@ Results_SDB <- Results_SDB[!grep("^Blank", Results_SDB$Charge_disks),]
 ```
 
 calculate absorbed mass [ng] 
-0.1 mL or 100 µL is the injection volume
-500 µL is the total volume of the condensed sample
+0.1 mL or 100 uL is the injection volume
+500 uL is the total volume of the condensed sample
 ```{r}
 Results_SDB = Results_SDB[, list(Compound, Mass_ng = 
                                    (Concentration* 0.1 * 500/100 * (Vol_all/Vol_Part)), 
                                        Time_retrieved, Charge_disks, Timespan_V1, Timespan_V2,comment),
                                 by = Code]
 
-# sort by timepoint
+# sort for timepoint
 Results_SDB = Results_SDB[order(Results_SDB$Time_retrieved),]
 ```
 
 
 codes water samples
 ```{r}
-Code_water = read.table(file.path(path,"Code_water.csv"), 
+Code_water = read.table(file.path(path,"Code_Water.csv"), 
                             header=TRUE, sep = ";")
 Code_water = as.data.table(Code_water)
 setnames(Code_water, c("code","extact.time"), c("Code","Timepoint"))
@@ -190,7 +190,7 @@ Code_water = Code_water[, list(Code, Timepoint, Time_after_Disk_1 =
                                                                                           Timepoint[3:15], 
                                                                                           units = "hours")))),
                                                  comment)]
-# These two values are before SDB disks of set two (5-day approach) were added
+# These two values are before SDB disks of set two (5-day dataset) were added
 Code_water[1,4] <- c(-47.66667)
 Code_water[2,4] <- c(-23.33333) 
 ```
@@ -205,7 +205,7 @@ merge water concentrations with timepoints and sort
 ```{r}
 Results_Water = merge(Results_Water, Code_water[,c(1:4)], by = "Code")
 
-# sort by timepoint
+# order for timepoint
 Results_Water = Results_Water[order(Results_Water$Timepoint),]
 ```
 
@@ -227,25 +227,25 @@ Results_Water = Results_Water[order(Results_Water$Time_after_Disk_1),]
 
 Results_Water <- as.data.frame(Results_Water)
 
-names(Results_Water)[3] <- c("Conc.water.D1") # concentrations of 7-day approach
+names(Results_Water)[3] <- c("Conc.water.D1") # concentrations of 7-day datasez
 names(Results_Water)[4] <- c("Time.water")
-# concentrations of 5-day approach
+# concentrations pf 5-day dataset
 Results_Water$Conc.water.D2 <- Results_Water$Conc.water.D1
 Results_Water$Conc.water.D2 <- ifelse(Results_Water$Time.water < 30, 0, Results_Water$Conc.water.D2) 
-Results_Water$Time.water <- (Results_Water$Time.water)/24 # use days in stream in hours
+Results_Water$Time.water <- (Results_Water$Time.water)/24 # use days instream of hours
 Results_Water <- Results_Water[!is.na(Results_Water$Conc.water.D1),]
 ```
 
 
-create dataframe for the passive sampler  
+create dataframe for the passive sampler 
 ```{r}
 Results_SDB <- as.data.frame(Results_SDB)
 SDB_Results <- Results_SDB
 # add nearly two days (exact time frame used) to 5-day approach to match with corresponding water concentrations
 SDB_Results$Timespan_V2 <- SDB_Results$Timespan_V2 + 47.66667 
 SDB_Results$Time.disks <- ifelse(is.na(SDB_Results$Timespan_V1), SDB_Results$Timespan_V2, SDB_Results$Timespan_V1)
-SDB_Results$Charge_disks <- gsub("Ver II", "D2", SDB_Results$Charge_disks) # 5-day approach
-SDB_Results$Charge_disks <- gsub("Ver I", "D1", SDB_Results$Charge_disks) # 7-day approch
+SDB_Results$Charge_disks <- gsub("Ver II", "D2", SDB_Results$Charge_disks) # 5-day dataset
+SDB_Results$Charge_disks <- gsub("Ver I", "D1", SDB_Results$Charge_disks) # 7-day dataset
 SDB_Results <- SDB_Results[, c(2,3,5,9)]
 names(SDB_Results)[2] <- c("mass_disk")
 SDB_Results$Time.disks <- (SDB_Results$Time.disks)/24
@@ -291,7 +291,7 @@ sorb_model <- function(time, state, parms) {
 ```
 
 
-function to fit the rate constands (parameters)
+function to fit the rate constants (parameters)
 ```{r}
 fun <- function(p, simObj, observations) {
   whichpar <- names(p)
@@ -303,7 +303,7 @@ fun <- function(p, simObj, observations) {
 ```
 
 
-### combined loop for both single approaches and the combined approach
+### combined loop for both single datasets and both datasets combined
 
 create several empty data.frames, which will be filled in the loop
 ```{r}
@@ -312,15 +312,12 @@ k_values_t1_alg2 <- NULL
 Rs_t1_alg1 <- NULL
 deviance_t1_alg1 <- NULL
 Rs_t1_alg2 <- NULL
-deviance_t1_alg2 <- NULL
 
 k_values_t1 <- NULL
 Rs_t1 <- NULL
-deviance_t1 <- NULL
 
 k_values_t2 <- NULL
 Rs_t2 <- NULL
-deviance_t2 <- NULL
 
 k_values_comb <- NULL
 Rs_comb <- NULL
@@ -332,23 +329,23 @@ deviance_comb <- NULL
 for(i in 1:length(Compounds)) { # number of compounds 
 y <- Compounds[i]
 
-  # in this step calculations for compound y are conducted, will be replaced (in the loop) for each compound 
+  # at this step calculations for compound y is conduced, will be replaes (in the loop) for each compound 
   Water_comb = Results_Water[Results_Water$Compound == y,] 
-  # 7-day approach
+  # 7-day dataset
   Water_t1 = Results_Water[Results_Water$Compound == y, c(2,3,4)] 
   Water_t2 = Results_Water[Results_Water$Compound == y, c(2,5,4)] 
-  # 5-day approach: set the start of the water concentration to the time where SDB disks are added
+  # 5-day dataset: set the start of the water concentration to the stime where SDB disks are added
   Water_t2$Time.water <- Water_t2$Time.water - 1.9861111 
   Water_t2 <- Water_t2[!Water_t2$Time.water < 0,]
   
   SDB_comb = SDB_Results[SDB_Results$Compound == y ,]
-  # 7-day approach
+  # 7-day dataset
   SDB_t1 = SDB_Results[SDB_Results$Compound == y & SDB_Results$Charge_disks == "D1",]
   SDB_t2 = SDB_Results[SDB_Results$Compound == y & SDB_Results$Charge_disks == "D2",]
-  # 5-day approach, set time when SDB disks are added to zero
+  # 5-day dataset, set time when SDB disks are added to zero
   SDB_t2$Time.disks <- SDB_t2$Time.disks - 1.986083
   
-### Timepoint 1  - 7-day approach
+### Timepoint 1  - 7-day dataset
 ### Algorithm 1
 # given water concentrations 
 # given (dummy) values for kws and ksw
@@ -368,8 +365,8 @@ mod1 <- new("odeModel",
               times = c(from=0, to=8, by=1/(24)),# c(from=0, to=170, by=1/(24))
             # everything will be modelled for each hour a day
               init = c(s = 0), # initial concentration on the sorbent (s) is 0
-              solver = "lsoda", # the used algorithm to solve the differential equation
-            # lsoda is used due to its flexibility, 
+              solver = "lsoda", # the used algorith to solve the differential equation
+            # lsoda is used as a algorithm due to its flexibility, 
             # which is necessary because of the large steps in the water concentration
               initfunc = function(obj) {
                 tt <- fromtoby(times(obj))
@@ -408,21 +405,21 @@ k_values_t1_alg1$kws[y] <- fit_t1_alg1$par[1] # kws
 k_values_t1_alg1$ksw[y] <- fit_t1_alg1$par[2] # ksw
 
 
-# calculate model deviance
-deviance_t1_alg1[y] <- deviance(fit_t1_alg1)
-
-# calculate sampling rate of 7-day approach with algorithm 1
+# calculate sampling rate of 7-day dataset with algorithm 1
 parms_t1_alg1  <- fit_t1_alg1$par
 state <- c(0) # Is the inital concentration in the SDB disk (sorbent)
 time <- seq(from = 0, 20, by = 1) # model for 20 days
 out_t1_alg1 <- lsoda(y=state, times=time, sorb_model, parms=parms_t1_alg1)
 
-# We use an initial concentration of water of 1 and the mass of pesticide accummulated
-# after 5 days, because that is the duration of the linear uptake.
+# We use a initial concentration of water of 1 and the mass of pesticide accummulated
+# after 5 days, because this is planned duration of field exposure.
 Rs_t1_alg1[y] <- (out_t1_alg1[6,2] /(1*5)  )
 Rs_t1_alg1
 
-### Timepoint 1  - 7-day approach
+
+
+
+### Timepoint 1  - 7-day dataset
 ### Algorithm 2
 obstime_t1 <- SDB_t1$Time.disks             # measured times
 i_t1 <- which(!is.na(obstime_t1))            # delete lines with NA
@@ -434,11 +431,13 @@ yobs_t1 <- data.frame(s = SDB_t1$mass_disk[i_t1])  # add concentration values wh
 mod3_alg2 <- mod1
 lower <- c(kws = 0, ksw = 0)   # lower range of tested values
 upper <- c(kws = 10, ksw = 10) # upper range of tested values
-# this range is added to reduce the time the algorithm needs to calculate, range could be extended or reduced
-parms(mod3_alg2) <- c(kws = 1, ksw = 0.1) # adding dummy variables (ideally in the range you would expect them)
+# this range in added to reduce the time the algorithm needs to calculate, range could be extended or reduced
+parms(mod3_alg2) <- c(kws = 1, ksw = 0.1) # adding dummy variables (idealy in the range you would expect them)
 fit_t1_alg2 <- fitOdeModel(mod3_alg2, lower = lower, upper = upper, obstime = obstime_t1,
                     yobs = yobs_t1, control=list(trace = FALSE))
 # using fitODEModel the rate constants are fitted with the observations to calculate the most reasonable ones
+
+
 
 # save the rate constants
 k_values_t1_alg2$kws[y] <- fit_t1_alg2@par[1] # kws
@@ -449,8 +448,7 @@ k_values_t1_alg2
 # used to later on prepare graph
 parms(mod3_alg2) <- fit_t1_alg2@par
 res3_alg2 <- sim(mod3_alg2)
-# calculate model deviance
-deviance_t1_alg2[y] <- deviance(fit_t1_alg2)
+
 
 # calculate sampling rate of 7-day approach with algorithm 2
 parms_t1_alg2  <- fit_t1_alg2@par
@@ -458,14 +456,13 @@ state <- c(0) # Is the inital sorbent concentration
 time <- seq(from = 0, 20, by =1)  # model for 20 days
 out_t1_alg2 <- lsoda(y=state, times=time, sorb_model, parms=parms_t1_alg2)
 
-# We use an initial concentration of water of 1 and the mass of pesticide accummulated
-# after 5 days, because that is the duration of the linear uptake.
+# We use a initial concentration of water of 1 and the mass of pesticide accummulated after 5 days
 Rs_t1_alg2[y] <- (out_t1_alg2[6,2] /(1*5)  )
 Rs_t1_alg2
 
 
 
-### Timepoint 2  - 5-day approach
+### Timepoint 2  - 5-day dataset
 ### algorithm 2
 mod4 <- new("odeModel",
               main = function (time, init, parms, ...) {
@@ -476,12 +473,12 @@ mod4 <- new("odeModel",
                 list(c(ds))
                })
               },
-              parms = c(kws=1, ksw=0.1),  # adding approximate parameters to the fits
+              parms = c(kws=1, ksw=0.1),  # adding approximate paramaters for the fits
               times = c(from=0, to=8, by=1/(24)), 
             # everything will be modelled for each hour a day
               init = c(s = 0), # initial concentration on the sorbent (s) is 0
-              solver = "lsoda", # the used algorithm to solve the differential equation
-            # lsoda is used due to its flexibility, 
+              solver = "lsoda", # the used algorith to solve the differential equation
+            # lsoda is used as a algorithm due to its flexibility, 
             # which is necessary because of the large steps in the water concentration
               initfunc = function(obj) {
                 tt <- fromtoby(times(obj))
@@ -497,7 +494,7 @@ mod4 <- new("odeModel",
 ### estimate rate constants
 mod5 <- mod4
 
-# observations of sorbent for 5-day approach
+# observations of sorbent for 5-day dataset
 obstime_t2 <- SDB_t2$Time.disks             # measured times
 i_t2 <- which(!is.na(obstime_t2))            # delete lines with NA
 obstime_t2 <- obstime_t2[i_t2]
@@ -510,40 +507,37 @@ upper <- c(kws = 10, ksw = 10) # upper range of rate constants
 parms(mod5) <- c(kws = 1, ksw = 0.1) # adding dummy variables (idealy in the range you would expect them)
 fit_t2 <- fitOdeModel(mod5, lower = lower, upper=upper, obstime = obstime_t2,
                    yobs = yobs_t2, control=list(trace = FALSE))
-# using fitODEModel the k-values are fitted with the observations to calculate the most plausible ones
+# using fitODEModel the k-values are fitted with the observations to calculate the most reasonable ones
 
 # save the rate constants to empty data frame
 k_values_t2$kws[y] <- fit_t2@par[1] # kws
 k_values_t2$ksw[y] <- fit_t2@par[2] # ksw
 
 
-parms(mod5) <- fit_t2@par # the calculated rate constants are added to the model, needed for figure later on
+parms(mod5) <- fit_t2@par # the calculated rate constants are added to the mode, needed for figure later on
 res5 <- sim(mod5)
-# calculate model deviance
-deviance_t2[y] <- deviance(fit_t2)
 
-# calculate sampling rate of 5-day appraoch with algorithm 2
+# calculate sampling rate of 5-day dataset with algorithm 2
 parms_t2  <- fit_t2@par
 state <- c(0) # Is the inital sorbent concentration
 time <- seq(from = 0, 20, by =1) # model for 20 days
 out_t2 <- lsoda(y=state, times=time, sorb_model, parms=parms_t2)
 
 
-# We use an initial concentration of water of 1 and the mass of pesticide accumulated
-# after 5 days, because that is the duration of the linear uptake.
+# We use an initial concentration of water of 1 and the mass of pesticide accummulated after 5 days
 Rs_t2[y] <- (out_t2[6,2] /(1*5) )
 Rs_t2
 
 
 
-# combined approach, algorithm 1
+# combined dataset, algorithm 1
 # given water concentrations 
 # given values for kws and ksw (dummy variables)
 mod6 <- new("odeModel",
             main = function (time, init, parms, ...) {
               with(as.list(c(init, parms, inputs)), {
-                win1 <- approxTime1(inputs, time, rule=2)["w1"] # disks 7-day approach
-                win2 <- approxTime1(inputs, time, rule=2)["w2"] # disks 5-day approach
+                win1 <- approxTime1(inputs, time, rule=2)["w1"] # disks 7-day dataset
+                win2 <- approxTime1(inputs, time, rule=2)["w2"] # disks 5-day dataset
                 
                 ds1 <- kws * win1 - ksw * s1
                 ds2 <- kws * win2 - ksw * s2
@@ -558,8 +552,8 @@ mod6 <- new("odeModel",
               tt <- fromtoby(times(obj))
               inputs(obj) <- as.matrix(data.frame(
                 time = Water_comb$Time.water, 
-                w1 = Water_comb$Conc.water.D1, # water 7-day approach
-                w2 = Water_comb$Conc.water.D2 # water 5-day approach
+                w1 = Water_comb$Conc.water.D1, # water 7-day dataset
+                w2 = Water_comb$Conc.water.D2 # water 5-day dataset
               ))
               obj
             }
@@ -593,156 +587,84 @@ res8 <- sim(mod8)
 k_values_comb$kws[y] <- fit_comb$par[1] # kws
 k_values_comb$ksw[y] <- fit_comb$par[2] # ksw
 
-# calculate model deviance 
-deviance_comb[y] <- deviance(fit_comb)
+# calculate model residual standard error
+deviance_comb[y] <- summary(fit_comb)$sigma
 
-# calculate sampling rates of combined approach
+# calculate sampling rates of combined dataset
 parms_comb  <- fit_comb$par 
 state <- c(0) # Is the inital sorbent concentration
 time <- seq(from = 0, 20, by =1) # model for 20 days
 out_comb <- lsoda(y=state, times=time, sorb_model, parms=parms_comb) 
 
-# We use an initial concentration of water of 1 and the mass of pesticide accumulated
-# after 5 days, because that is the duration of the linear uptake.
+# We use a initial concentration of water of 1 and the mass of pesticide accummulated after 5 days
 Rs_comb[y] <- (out_comb[6,2] /(1*5)  )
 
 
-# save dataframes needed for figures in the SI
-assign(paste("out_comb",y,sep="_"), out_comb)        # combined approach
-assign(paste("out_t1_alg1",y,sep="_"), out_t1_alg1)  # 7-day approach algorithm 1
-assign(paste("out_t1_alg2",y,sep="_"), out_t1_alg2)  # 7-day approach algorithm 2
-assign(paste("out_t2",y,sep="_"), out_t2)            # 5-day approach
+# save dataframes needed for figures for the SI
+assign(paste("out_comb",y,sep="_"), out_comb)        # combined dataset
+assign(paste("out_t1_alg1",y,sep="_"), out_t1_alg1)  # 7-day dataset algorithm 1
+assign(paste("out_t1_alg2",y,sep="_"), out_t1_alg2)  # 7-day dataset algorithm 2
+assign(paste("out_t2",y,sep="_"), out_t2)            # 5-day dataset
 
 # plotting + saving each of the fits
 file = y # for compound y
-file = file.path(path,"fits", paste(file,"tiff", sep=".")) # create filename for each figure, will be saved in newly created folder "fits"
-tiff(filename = file, width = 7, height = 6, units="in", res = 150)
-par(mar=c(5.1, 6.3, 2, 1), mgp = c(3.5,1,0))
+file = file.path(path,"fits", paste(file,"png", sep=".")) # create filename for each figure, will be saves in newly created folfer "fits"
+png(filename=file, width=7, height=6, units="in", res=1000)
+par(mar=c(5.1, 6.9, 2, 1), mgp = c(3.5,1,0))
 
-# Prepare one figure where all fits are displayed simultaneously
-plot(res3_alg1, ylim = c(0, (12/10)*max(Water_t1$Conc.water.D1)), main = paste(y), lwd = 2, xlab = c("time [days]"), ylab = c("water concentration [ng/L]\n compound mass on disk [ng/SDB]"), xlim = c(0,8), las = 1, cex.lab = 1.3, cex.axis = 1.3) # add results of 7-day approch with algorithm 1 
+# Prepare one figure with all sample points + fit
+# create empty plot
+plot(res3_alg1, ylim = c(0, (12/10)*max(Water_t1$Conc.water.D1)), main = paste(y), lwd = 2, xlab = c("time [days]"),
+     ylab = expression(atop("water concentration [ng L"^"-1"* "]", "compound mass on disk [ng]")), 
+     xlim = c(0,8), las = 1, cex.lab = 1.5, cex.axis = 1.5, cex.main = 1.5, xaxs="i", yaxs="i", type = "n") 
 
-# add results of 7-day approach with alg. 2
-lines(res3_alg2@out , col="lightslategrey", lwd = 2) 
-points(SDB_t1$Time.disks, SDB_t1$mass_disk, pch = 16) # the points of the SDB disk concentrations are added 
 
-# results of 5-day approach are added
-lines(res5@out + (47.666/24) # needs to be added that fitting starts at correct position in the graph
-      , col="red", lwd = 2) 
+# add 7-day data
+points(SDB_t1$Time.disks, SDB_t1$mass_disk, pch = 16) # the points of the SDB disk concentration are added 
+
+# add 5-day data
 points(SDB_t2$Time.disks + (47.666/24)
        , SDB_t2$mass_disk, col="red", pch = 16) # the points of the SDB disk concentration are added 
-lines(res8@out , col="darkgreen", lwd = 2) # add results of combined approach
+
+# add results of fit
+lines(res8@out , col="darkgreen", lwd = 2) 
 
 # add water concentrations with loess smoother
 loess_water <- loess(Conc.water.D1  ~ Time.water, data = Water_t1, span = 0.3)
 lines(Water_t1$Time.water, predict(loess_water), col = "blue", lwd = 2)
 points(Water_t1$Time.water, Water_t1$Conc.water.D1, col = "blue", pch = 16) # the water concentration is added as observed
 
-# Figures used for Figure S2 and figure of diazinon is displayed in the manuscript as Figure 1
+
+# Figures used for Figure S2 and Figure of diazinon is displayed in the manuscript as Figure 1
 dev.off()
 
 
 }
-
 ```
-
-#### Prepare plot Figure S3
-Diazinon
-combined approach
-```{r}
-png(filename="Rs_comb_Diazinon.png", width=6, height=5, units="in", res = 900) 
-out_Diazinon <- as.data.frame(out_comb_Diazinon)
-plot(out_Diazinon$time, out_Diazinon$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_Diazinon[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_Diazinon[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-day 5 approach
-```{r}
-png(filename="Rs_5d_Diazinon.png", width=6, height=5, units="in", res = 900) 
-out_5d_Diazinon <- as.data.frame(out_t2_Diazinon)
-plot(out_5d_Diazinon$time, out_5d_Diazinon$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_5d_Diazinon[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_5d_Diazinon[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-day 7 approach
-```{r}
-png(filename="Rs_7d_Diazinon.png", width=6, height=5, units="in", res = 900) 
-out_7d_Diazinon <- as.data.frame(out_t1_alg1_Diazinon)
-plot(out_7d_Diazinon$time, out_7d_Diazinon$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_7d_Diazinon[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_7d_Diazinon[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-Thiacloprid
-combined approach
-```{r}
-png(filename="Rs_comb_thiacloprid.png", width=6, height=5, units="in", res = 900) 
-out_comb_thiacloprid <- as.data.frame(out_comb_Thiacloprid)
-plot(out_comb_thiacloprid$time, out_comb_thiacloprid$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_comb_thiacloprid[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_comb_thiacloprid[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-5-day approach
-```{r}
-png(filename="Rs_5d_thiacloprid.png", width=6, height=5, units="in", res = 900) 
-out_5d_thiacloprid <- as.data.frame(out_t2_Thiacloprid)
-plot(out_5d_thiacloprid$time, out_5d_thiacloprid$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_5d_thiacloprid[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_5d_thiacloprid[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-7-day approach
-```{r}
-png(filename="Rs_7d_thiacloprid.png", width=6, height=5, units="in", res = 900) 
-out_7d_thiacloprid <- as.data.frame(out_t1_alg1_Thiacloprid)
-plot(out_7d_thiacloprid$time, out_7d_thiacloprid$`1`, xlab = "time [days]", ylab = "mass sorbed to SDB disk", pch = 16, typ = "o")
-segments(x0 = 5, y0 = -1, y1 = out_7d_thiacloprid[6,2], col = "red") #vertical line
-segments(x0 = -1, y0 = out_7d_thiacloprid[6,2], x1 = 5, col = "red") #horizontal line
-dev.off()
-```
-
-
 
 ### saving results into one dataframe
 
-rate constants + deviance
+rate constants
 ```{r}
-# 7-day approach alg. 1
+# 7-day dataset alg. 1
 k_values_t1_alg1 <- as.data.frame.list(k_values_t1_alg1)
 k_values_t1_alg1$Compound <- rownames(k_values_t1_alg1)
 
-deviance_t1_alg1 <- as.data.frame.list(deviance_t1_alg1)
-deviance_t1_alg1 <- t(deviance_t1_alg1)
-k_values_t1_alg1 <- cbind(k_values_t1_alg1, deviance_t1_alg1)
 setnames(k_values_t1_alg1, c("ksw","kws"), c("ksw_t1_alg1", "kws_t1_alg1"))
 
-# 7-day approach alg. 2
+# 7-day dataset alg. 2
 k_values_t1_alg2 <- as.data.frame.list(k_values_t1_alg2)
 k_values_t1_alg2$Compound <- rownames(k_values_t1_alg2)
 
-deviance_t1_alg2 <- as.data.frame.list(deviance_t1_alg2)
-deviance_t1_alg2 <- t(deviance_t1_alg2)
-k_values_t1_alg2 <- cbind(k_values_t1_alg2, deviance_t1_alg2)
 setnames(k_values_t1_alg2, c("ksw","kws"), c("ksw_t1_alg2", "kws_t1_alg2"))
 
-# 5-day approach
+# 5-day dataset
 k_values_t2 <- as.data.frame.list(k_values_t2)
 k_values_t2$Compound <- rownames(k_values_t2) 
 
-deviance_t2 <- as.data.frame.list(deviance_t2)
-deviance_t2 <- t(deviance_t2)
-k_values_t2 <- cbind(k_values_t2, deviance_t2)
 setnames(k_values_t2, c("ksw","kws"), c("ksw_t2", "kws_t2"))
 
-# combined approach
+# combined dataset
 k_values_comb <- as.data.frame.list(k_values_comb)
 k_values_comb$Compound <- rownames(k_values_comb)
 
@@ -760,25 +682,25 @@ k_values <- merge(k_values, k_values_comb, by=c("Compound"))
 
 sampling rates
 ```{r}
-# 7-day approach alg. 1
+# 7-day dataset alg. 1
 Rs_t1_alg1 <- as.data.frame(t(as.data.frame.list(Rs_t1_alg1)))
 Rs_t1_alg1$Compounds <- rownames(Rs_t1_alg1)
 names(Rs_t1_alg1)[1] <- c("Rs_t1_alg1")
 rownames(Rs_t1_alg1) <- c() # get rid of weird row names
 
-# 7-day approach alg. 2
+# 7-day dataset alg. 2
 Rs_t1_alg2 <- as.data.frame(t(as.data.frame.list(Rs_t1_alg2)))
 Rs_t1_alg2$Compounds <- rownames(Rs_t1_alg2)
 names(Rs_t1_alg2)[1] <- c("Rs_t1_alg2")
 rownames(Rs_t1_alg2) <- c() # get rid of weird row names
 
-# 5-day approach
+# 5-day dataset
 Rs_t2 <- as.data.frame(t(as.data.frame.list(Rs_t2)))
 Rs_t2$Compounds <- rownames(Rs_t2)
 names(Rs_t2)[1] <- c("Rs_t2")
 rownames(Rs_t2) <- c() # get rid of weird row names
 
-# combined approach
+# combined dataset
 Rs_comb <- as.data.frame(t(as.data.frame.list(Rs_comb)))
 Rs_comb$Compounds <- rownames(Rs_comb)
 names(Rs_comb)[1] <- c("Rs_comb")
@@ -800,17 +722,20 @@ Rs$Compound <- gsub("Piperonyl.butoxide", "Piperonyl-butoxide", Rs$Compound)
 save dataframe
 ```{r}
 results_all <- merge(Rs, k_values, by = c("Compound"))
-write.table(results_all, file = "results_all.csv", sep = ";")
+write.csv(results_all, file = "results_all2.csv", row.names = FALSE)
 ```
 
 
-### Figure S4: relationship sampling rates timepoint 1 two different algorithms
+### Figure S6: relationship sampling rates timepoint 1 two different algorithms
 ```{r}
-png(filename="Rs_7_day_approach.png", width=6, height=5, units="in", res = 1000) 
+png(filename="Rs_7_day_dataset.png", width=6, height=5, units="in", res = 1000) 
+par(mar=c(4.1, 4.9, 2.1, 2.1))
 Rs_both_t1_2alg <- lm(Rs_t1_alg1 ~ Rs_t1_alg2, data = Rs) 
-plot(Rs$Rs_t1_alg2, Rs$Rs_t1_alg1, pch=16, ylim=c(0,1), xlim=c(0,1), ylab = c("Rs using algorithm 1 [L/day]"), xlab = c("Rs using algorithm 2 [L/day]"))
+plot(Rs$Rs_t1_alg2, Rs$Rs_t1_alg1, pch=16, ylim=c(0,1), xlim=c(0,1), ylab = expression(paste("Rs using algorithm 1 [L d  "^"-1"*"]")), xlab = expression(paste("Rs using algorithm 2 [L d "^"-1"*"]")), xaxs="i", yaxs="i")
+
 abline(Rs_both_t1_2alg)
-summary(Rs_both_t1_2alg) # r? = 0.9975 
+text(0.1, 0.9, "r = 0.998 \n p < 0.001 \n n = 42")
+summary(Rs_both_t1_2alg) # r² = 0.9975 
 cor(Rs$Rs_t1_alg1, Rs$Rs_t1_alg2)
 dev.off()
 ```
@@ -820,7 +745,7 @@ dev.off()
 
 ### calculate logDow from logKow and from pKa - source ppdb
 To know the water solubility for neutral fraction
-calculation according to Carmichael, 2014
+calculation accoring to Carmichael, 2014
 ```{r}
 prop$logDow <- ifelse(is.na(prop$comment), prop$logkow, 
                       ifelse(prop$comment == "acid", prop$logkow - log10(1 + 10^(8 - prop$pka)), 
@@ -833,7 +758,7 @@ prop$logDow <- ifelse(is.na(prop$comment), prop$logkow,
 ### combine dataframes
 
 combine sampling rates with compound properties
-use sampling rates of combined approach
+use sampling rates of combined dataset
 ```{r}
 Rs_prop <- merge(Rs[,c(1,5)], prop, by = "Compound")
 ```
@@ -849,9 +774,9 @@ nrow(Rs_prop) == nrow(Rs_prop_H) + nrow(Rs_prop_I) + nrow(Rs_prop_F) + nrow(Rs_p
 ```
 
 
-### conduct LASSO for explanatory variables/ compound properties available for all compounds
+### conduct LASSO for explenatory variables/ compound properties available for all compounds
 
-check variable
+check varibable
 ```{r}
 hist(Rs_prop$ws)
 ```
@@ -877,7 +802,7 @@ coef(md1)
 # No variable was selcted
 ```
 
-### conduct LASSO for explanatory variables/ compound properties only available for a subset of compounds
+### conduct LASSO for explenatory variables/ compound properties only available for a subset of compounds
 ```{r}
 # make subset of compounds
 sub <- select(Rs_prop, Compound, Rs_comb, kfoc, pka)
@@ -897,9 +822,9 @@ coef(md1_sub)
 ```
 
 
-### Figure S5a: relationship of log Kow to sampling rate
+### Figure S4a: relationship of log Kow to sampling rate
 octanol-water partition coefficient - log10
-check variable
+check varibable
 ```{r}
 hist(Rs_prop$logkow)
 ```
@@ -909,18 +834,23 @@ all compounds
 ```{r}
 Kow_all <- lm(Rs_comb ~ logkow, data = Rs_prop) 
 png(filename="Rs_to_Kow.png", width=6, height=5, units="in", res = 1000) 
-plot(Rs_prop$logkow, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1), xlim=c(-0.3, 5.2), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log K"[ow])), ylab = c("Rs [L/day]"), las = 1)
+par(mar=c(4.1, 4.9, 2.1, 2.1))
+plot(Rs_prop$logkow, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1.1), xlim=c(-0.3, 5.2), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log K"[ow])), ylab = expression(paste("Rs [L d "^"-1"*"]")), las = 1, xaxs="i", yaxs="i")
 abline(Kow_all)
 points(Rs_prop_H$logkow, Rs_prop_H$Rs_comb, pch=1, cex = 2) # herbicides
 points(Rs_prop_I$logkow, Rs_prop_I$Rs_comb, pch=16, col = "black", cex = 2) #insecticides
 points(Rs_prop_F$logkow, Rs_prop_F$Rs_comb, pch=16, col = "gray50", cex = 2) # fungicides
 points(Rs_prop_S$logkow, Rs_prop_S$Rs_comb, pch=10, col = "black", cex = 2) # synergist
-summary(Kow_all) # R? = 0.25, p < 0.001
+
+summary(Kow_all) # R² = 0.25, p < 0.001
+
+text(0.2, 1.0, "R² = 0.25 \n p < 0.001 \n n = 42")
 dev.off()
 ```
 
-### Figure S5b: relationship of log Dow (ppdb) to sampling rate
-distribution coefficient
+
+### Figure S4b: relationship of log Dow (ppdb) to sampling rate
+destribution coefficient
 ```{r}
 hist(Rs_prop$logDow)
 ```
@@ -930,18 +860,21 @@ all compounds
 ```{r}
 Dow_all <- lm(Rs_comb ~ logDow, data = Rs_prop) 
 png(filename="Rs_to_Dow.png", width=6, height=5, units="in", res = 1000) 
-plot(Rs_prop$logDow, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1), xlim=c(-6.5, 4.5), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log D"[ow])), ylab = c("Rs [L/day]"), las = 1)
+par(mar=c(4.1, 4.9, 2.1, 2.1))
+plot(Rs_prop$logDow, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1.1), xlim=c(-6.9, 5), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log D"[ow])), ylab = expression(paste("Rs [L d "^"-1"*"]")), las = 1, xaxs="i", yaxs="i")
 abline(Dow_all)
 points(Rs_prop_H$logDow, Rs_prop_H$Rs_comb, pch=1, cex = 2) # herbicides
 points(Rs_prop_I$logDow, Rs_prop_I$Rs_comb, pch=16, col = "black", cex = 2) #insecticides
 points(Rs_prop_F$logDow, Rs_prop_F$Rs_comb, pch=16, col = "gray50", cex = 2) # fungicides
 points(Rs_prop_S$logDow, Rs_prop_S$Rs_comb, pch=10, col = "black", cex = 2) # synergist
 
-summary(Dow_all) # R? = 0.13, p = 0.019
+summary(Dow_all) # R² = 0.13, p = 0.019
+
+text(-5.7, 0.95, "R² = 0.13 \n p = 0.019 \n n = 42")
 dev.off()
 ```
 
-### Figure S5c: relationship of log Dow (ChemAxon) to sampling rate
+### Figure S4c: relationship of log Dow (ChemAxon) to sampling rate
 ```{r}
 hist(Rs_prop$logDow_chem)
 ```
@@ -950,19 +883,22 @@ hist(Rs_prop$logDow_chem)
 ```{r}
 Dow_all_chem <- lm(Rs_comb ~ logDow_chem, data = Rs_prop) 
 png(filename="Rs_to_Dow_chem.png", width=6, height=5, units="in", res = 1000) 
-plot(Rs_prop$logDow_chem, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1), xlim=c(-1.5, 5), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log D"[ow])), ylab = c("Rs [L/day]"), las = 1)
+par(mar=c(4.1, 4.9, 2.1, 2.1))
+plot(Rs_prop$logDow_chem, Rs_prop$Rs_comb, type = "n", pch=16, ylim=c(0,1), xlim=c(-1.5, 5.3), cex.axis = 1.5, cex.lab = 1.5, xlab = expression(paste("log D"[ow])), ylab = expression(paste("Rs [L d "^"-1"*"]")), las = 1, xaxs="i", yaxs="i")
 abline(Dow_all_chem)
 points(Rs_prop_H$logDow_chem, Rs_prop_H$Rs_comb, pch=1, cex = 2) # herbicides
 points(Rs_prop_I$logDow_chem, Rs_prop_I$Rs_comb, pch=16, col = "black", cex = 2) #insecticides
 points(Rs_prop_F$logDow_chem, Rs_prop_F$Rs_comb, pch=16, col = "gray50", cex = 2) # fungicides
 points(Rs_prop_S$logDow_chem, Rs_prop_S$Rs_comb, pch=10, col = "black", cex = 2) # synergist
-summary(Dow_all_chem) # R? = 0.35, p < 0.001
+summary(Dow_all_chem) # R² = 0.35, p < 0.001
+
+text(-0.85, 0.9, "R² = 0.35 \n p < 0.001 \n n = 42")
 dev.off()
 ```
 
 
-## calculate TWA concentrations from sampling rates and mass absorbed to disks with longest exposure time
-### 5-day approach
+## calculate TWA concentrations from sampling rates and masss absorbed to disks with logest exposure durations
+### 5-day dataset
 ```{r}
 Results_SDB_5_day <- Results_SDB[Results_SDB$Code == "CH1" | Results_SDB$Code == "CH5",] 
 # SDB disks CH1 and CH5 are the ones which were exposed for 5 days
@@ -984,7 +920,7 @@ TWA_SDB_5$TWA_2d_5da <- TWA_SDB_5$Mass_ng / (TWA_SDB_5$Rs_comb * 2)
 ```
 
 
-### 7-day approach
+### 7-day dataset
 ```{r}
 Results_SDB_7_day <- Results_SDB[Results_SDB$Code == "CH18",] 
 # sample CH18 was exposed for 7 days, 2nd replicate was lost
@@ -1044,8 +980,38 @@ sd(compare_TWA_conc_max$comp_2d_5da) # 12.6
 ```
 
 
-### prepare Figure 3 in the manuscript and Figure S6 in the SI
+### prepare Figure 3 
+```{r}
+  # only use Diazinon
+  Water_t1 = Results_Water[Results_Water$Compound == "Diazinon",] 
+  TWA = TWA_SDB[TWA_SDB$Compound == "Diazinon",]
 
+png(filename="Figure_3.png", width=7, height=6, units="in", res=1000)
+par(mar=c(4.1, 4.9, 2.1, 2.1))
+# create empty plot
+plot(Water_t1$Time.water, Water_t1$Conc.water.D1, type ="n", pch = 16, ylim = c(0, (11/10)*max(Water_t1$Conc.water.D1)),
+     xlim = c(0,7), main = "Diazinon", lwd = 2, ylab = expression(paste("concentration [ng L"^"-1"*"]")), xlab = c("time [days]"), las = 1, cex.axis = 1.2, cex.lab = 1.2, xaxs="i", yaxs="i")
+
+
+# Water concentration
+loess_water <- loess(Conc.water.D1  ~ Time.water, data = Water_t1, span = 0.3)
+lines(Water_t1$Time.water, predict(loess_water), col = "blue", lwd = 2)
+points(Water_t1$Time.water, Water_t1$Conc.water.D1, col = "blue", pch = 16)
+
+abline(h = TWA$TWA_7d, col = "darkgreen", lwd = 2.5) # add TWA SDB disk exposed 7 days
+lines(c(2,7.5),c(TWA$TWA_5d,TWA$TWA_5d), col = "black", lwd = 2.5) # add TWA SDB disk exposed 5 days
+lines(c(2.5,4.5),c(TWA$TWA_2d_7da,TWA$TWA_2d_7da), col = "red", lwd = 2.5) # add TWA t = 2 days based on SDB disk exposed for 7 days
+lines(c(2.5,4.5),c(TWA$TWA_2d_5da,TWA$TWA_2d_5da), col = "orange", lwd = 2.5) # add TWA t = 2 days based on SDB disk exposed for 5 days
+
+legend('topright', 
+       legend = c("7 day disk, t = 2", "5 day disk, t = 2", "5 day disk, t = 5", "7 day disk, t = 7", "water concentration"),
+       col = c("red", "orange", "black", "darkgreen", "blue"),
+       lty = c(rep(1, 5)), bty = "n", cex=1, lwd = 2)
+dev.off()
+```
+
+
+### prepare Figure S5 in the SI
 ```{r}
 
 for(i in 1:length(Compounds)) { # number of compounds 
@@ -1056,13 +1022,18 @@ y <- Compounds[i]
   TWA = TWA_SDB[TWA_SDB$Compound == y,]
 
 
-# now plotting + saving each of the fits to check if everything worked
+# now plotting + saving each of the fittings to check if everything worked
 file = y
-file = file.path(path,"TWA", paste(file,"tiff", sep="."))
-tiff(filename=file, width=7, height=6, units="in", res=1000)
-# plot actual water concentration
-plot(Water_t1$Time.water, Water_t1$Conc.water.D1, type ="n", col = "blue", pch = 16, ylim = c(0, (11/10)*max(Water_t1$Conc.water.D1)),
-     xlim = c(0,7), main = paste(y), lwd = 2, ylab = c("concentration [ng/L]"), xlab = c("time [days]"), las = 1, cex.axis = 1.2, cex.lab = 1.2) # Water concentration
+file = file.path(path,"TWA", paste(file,"png", sep="."))
+
+png(filename=file, width=7, height=6, units="in", res=1000)
+par(mar=c(4.1, 4.9, 2.1, 2.1))
+# create empty plot
+plot(Water_t1$Time.water, Water_t1$Conc.water.D1, type ="n", pch = 16, ylim = c(0, (11/10)*max(Water_t1$Conc.water.D1)),
+     xlim = c(0,7), main = paste(y), lwd = 2, ylab = expression(paste("concentration [ng L"^"-1"*"]")), xlab = c("time [days]"), las = 1, cex.axis = 1.6, cex.lab = 1.5, cex.main = 1.5, xaxs="i", yaxs="i")
+
+
+# Water concentration
 loess_water <- loess(Conc.water.D1  ~ Time.water, data = Water_t1, span = 0.3)
 lines(Water_t1$Time.water, predict(loess_water), col = "blue", lwd = 2)
 points(Water_t1$Time.water, Water_t1$Conc.water.D1, col = "blue", pch = 16)
@@ -1073,7 +1044,6 @@ lines(c(2.5,4.5),c(TWA$TWA_2d_7da,TWA$TWA_2d_7da), col = "red", lwd = 2.5) # add
 lines(c(2.5,4.5),c(TWA$TWA_2d_5da,TWA$TWA_2d_5da), col = "orange", lwd = 2.5) # add TWA t = 2 days based on SDB disk exposed for 5 days
 
 dev.off()
-
 
 }
 
@@ -1087,7 +1057,7 @@ create dataframe where sampling rates calculated in this study are added
 Rs_compare <- merge(Rs_other_studies[,c(2, 4, 6, 7, 11, 10)], Rs_prop[,c(1, 2, 3)], by = c("CAS"))
 ```
 
-### without protective membrane == naked disks
+### without closing membrane == naked disks
 ```{r}
 Rs_compare_naked <- Rs_compare[is.na(Rs_compare$Membran),]
 Rs_compare_naked <- droplevels(Rs_compare_naked)
@@ -1097,15 +1067,18 @@ Rs_compare_naked <- droplevels(Rs_compare_naked)
 ### Prepare Figure 2
 ```{r}
 svg(filename="comparison_Rs.svg", width=8, height=6.5, pointsize=14)
-Rs_compare_nak <- lm(Rs_comb ~ Rs, data = Rs_compare_naked) 
-plot(Rs_compare_naked$Rs, Rs_compare_naked$Rs_comb, type="n", xlab = c("sampling rate [L/day] previous studies"), ylab=("sampling rate [L/day] this study"), pch=16, ylim=c(0, 1.3), xlim=c(0, 1.3), cex.axis = 1.2, cex.lab = 1.2, las = 1)
+par(mar=c(5.5, 6.5, 2.1, 2.1), mgp = c(4, 1, 0))
+
+
+plot(Rs_compare_naked$Rs, Rs_compare_naked$Rs_comb, type="n", xlab = NA , ylab= NA, pch=16, ylim=c(0, 1.3), xlim=c(0, 1.3), cex.axis = 1.2, cex.lab = 1.2, las = 1, xaxs="i", yaxs="i")
+mtext(side = 1, expression(atop("sampling rate [ng L"^"-1"*"]", "previous studies")), line = 4, cex = 1.2)
+mtext(side = 2, expression(atop("sampling rate [ng L"^"-1"*"]", "this study")), line = 3, cex = 1.2)
 
 cols <- c(NA, NA, "steelblue", NA, "black", "darkgreen", "red", NA, NA)
 pchs <- c(15, 19, NA, NA, 17, NA, 18, NA, NA, NA, 7)
 points(Rs_compare_naked$Rs, Rs_compare_naked$Rs_comb, col = cols[Rs_compare_naked$Flow.factor.new], # colour for flow velocity
        pch = pchs[Rs_compare_naked$publication.factor], cex=1.4) # shape for publication
 
-abline(Rs_compare_nak)
 abline(0,1, col = "red") # identity line, 1:1 line
 
 # Problem two compounds have the same first three letters, correct abbreviations
@@ -1113,8 +1086,16 @@ Rs_compare_naked$Comp_short <- substring(Rs_compare_naked$Compound, 1 , 3)
 Rs_compare_naked$Comp_short <- ifelse(Rs_compare_naked$Compound == "Dimethoat", "Dit", 
                                        ifelse(Rs_compare_naked$Compound == "Dimethomorph", "Dip",
                                               Rs_compare_naked$Comp_short))
-text(Rs_compare_naked$Rs, Rs_compare_naked$Rs_comb, labels=Rs_compare_naked$Comp_short,  pos=1, offset=0.5,cex=0.8)
-summary(Rs_compare_nak)
+text(Rs_compare_naked$Rs, Rs_compare_naked$Rs_comb, labels=Rs_compare_naked$Comp_short,  pos=3, offset=0.5,cex=0.8)
+
+legend('bottomright', 
+       legend = c("0.13 – 0.14 m s", "0.15 – 0.2 m s", "0.4 m s", "0.75 – 0.85 m s"),
+       col = c("steelblue", "black", "darkgreen", "red"),
+       pch = c(rep(16, 4)), bty = "n", cex=1)
+
+legend('topright', 
+       legend = expression(atop("s"^"-1")), bty = "n", cex=1)
+
 dev.off()
 ```
 saved as svg, overlaying compound names were moved using Inkscape.
@@ -1131,6 +1112,7 @@ names(data_1_1)[1] <- c("Rs_comb")
 names(data_1_1)[2] <- c("Rs")
 
 result <- q2(used_data, data_1_1, Rs_comb ~ Rs)
+
+# calculate RMSE
+result@result$pred$rmse
 ```
-
-

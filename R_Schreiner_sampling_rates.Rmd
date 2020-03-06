@@ -1103,7 +1103,7 @@ saved as svg, overlaying compound names were moved using Inkscape.
 #### measured divergence of correlation to the identity line
 use Q2 statistics
 ```{r}
- # methods, stats?
+ # methods, stats
 used_data <- Rs_compare_naked[, c("Rs_comb", "Rs")]
 x <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)
 y <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0)

@@ -1,7 +1,7 @@
 Repo for the publication "Sampling rates for passive samplers exposed to a field-relevant peak of 42 organic pesticides"
 ====================================================================================================================
 
-This repo contains the R code and data for the related publication submitted to Science of the Total Environment.
+This repo contains the R code and data for the related publication published in [Science of the Total Environment](https://www.sciencedirect.com/science/article/pii/S0048969720338985)
 
 R code (RMarkdown document) written by Verena C. Schreiner and Mira Kattwinkel, revised by Stefan Kunz and Ralf B. Schäfer
   
